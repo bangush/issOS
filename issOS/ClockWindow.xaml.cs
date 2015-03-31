@@ -13,9 +13,9 @@ namespace issOS
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class ClockWindow : Window
 	{
-		public MainWindow()
+		public ClockWindow()
 		{
 			InitializeComponent();
 		}
@@ -34,8 +34,7 @@ namespace issOS
 			modCheck = new Thread(CheckKeyBoard);
 			modCheck.SetApartmentState(ApartmentState.STA);
 			modCheck.Start();
-			ipBox.Text = Environment.UserName;
-			LoadIPAddress();
+			clockBox.Text = DateTime.Now.ToShortDateString() + Environment.NewLine + DateTime.Now.ToString("H:m:s");
 		}
 
 		private void CheckKeyBoard()
@@ -52,17 +51,13 @@ namespace issOS
 						WindowsServices.SetWindowExTransparent(hwnd);
 				});
 				Thread.Sleep(100);
+
+				clockBox.Dispatcher.Invoke((Action)delegate {
+					clockBox.Text = DateTime.Now.ToShortDateString() + Environment.NewLine + DateTime.Now.ToString("HH:mm:ss");
+				});
 			}
 		}
 
-		private async Task LoadIPAddress()
-		{
-			using (WebClient wc = new WebClient())
-			{
-				string ipAddress = await wc.DownloadStringTaskAsync("http://icanhazip.com/");
-				ipBox.Text = ipAddress.Trim();
-			}
-		}
 
 		private void ipBox_MouseMove(object sender, MouseEventArgs e)
 		{
@@ -70,7 +65,7 @@ namespace issOS
 
 			if (modenabled && e.LeftButton == MouseButtonState.Pressed)
 			{
-				mainWin.DragMove();
+				clockWin.DragMove();
 				RotateWindowSpherical();
 			}
 		}

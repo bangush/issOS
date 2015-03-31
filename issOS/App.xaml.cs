@@ -13,5 +13,15 @@ namespace issOS
 	/// </summary>
 	public partial class App : Application
 	{
+		protected override void OnStartup(StartupEventArgs e)
+		{
+			ClockWindow cw = new ClockWindow();
+			cw.Show();
+
+			MainWindow mw = new MainWindow();
+			mw.Show();
+
+			base.OnStartup(e);
+		}
 	}
 }
