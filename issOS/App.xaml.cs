@@ -21,6 +21,9 @@ namespace issOS
 			MainWindow mw = new MainWindow();
 			mw.Show();
 
+			SpotifyWindow sw = new SpotifyWindow();
+			sw.Show();
+
 			base.OnStartup(e);
 		}
 	}
