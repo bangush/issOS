@@ -34,7 +34,7 @@ namespace issOS
 			modCheck = new Thread(CheckKeyBoard);
 			modCheck.SetApartmentState(ApartmentState.STA);
 			modCheck.Start();
-			clockBox.Text = DateTime.Now.ToShortDateString() + Environment.NewLine + DateTime.Now.ToString("H:m:s");
+			clockBox.Text = DateTime.Now.ToShortDateString() + Environment.NewLine + DateTime.Now.ToString("HH:mm:ss");
 		}
 
 		private void CheckKeyBoard()
